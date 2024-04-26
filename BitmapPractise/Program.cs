@@ -7,7 +7,7 @@ int H = 800;
 
 Bitmap bitmap = new Bitmap(W, H);
 
-using (PictureGenerator gen = new GraphPictureGenerator(bitmap, Graphics.FromImage(bitmap), GraphReader.ReadGraph("graph2.txt", true)))
+using (PictureGenerator gen = new RoundGrapfPictureGenerator(bitmap, Graphics.FromImage(bitmap), GraphReader.ReadGraph("graph2.txt", true)))
 {
     gen.Draw();
 
