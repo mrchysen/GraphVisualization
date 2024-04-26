@@ -9,7 +9,6 @@ namespace BitmapPractise.Graph
     public class Graph
     {
         public int Count => Nodes.Count;
-        public bool IsOriented => false;
         public List<List<int>> Nodes { get; protected set; } = new List<List<int>>();
 
         public List<int> this[int index] => Nodes[index];

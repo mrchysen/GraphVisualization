@@ -29,13 +29,15 @@ public class RoundGrapfPictureGenerator : GraphPictureGenerator
 
             for (int j = 0; j < graph[i].Count; j++)
             {
-                if (i < graph[i][j])
-                {
-                    var point2 = GetPointByNum(graph[i][j], fi, centre);
-                    DrawEdge(point, point2);
-                }
-
+                var point2 = GetPointByNum(graph[i][j], fi, centre);
+                    
+                DrawEdge(point, point2);
             }
+        }
+
+        for (int i = 0; i < n; i++)
+        {
+            var point = GetPointByNum(i, fi, centre);
 
             DrawNode(i + 1, point);
         }
