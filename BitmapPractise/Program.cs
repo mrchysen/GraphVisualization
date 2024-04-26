@@ -3,12 +3,14 @@ using BitmapPractise.Graph;
 using System.Diagnostics;
 using System.Drawing;
 
-int W = 800;
-int H = 800;
+int W = 256;
+int H = 256;
+
+Rectangle rec = new(20,20, W - 40, H - 40);
 
 Bitmap bitmap = new Bitmap(W, H);
 
-using (PictureGenerator gen = new RoundGrapfPictureGenerator(bitmap, Graphics.FromImage(bitmap), GraphReader.ReadGraph("graph2.txt", true)))
+using (PictureGenerator gen = new RoundGraphPictureGenerator(bitmap, Graphics.FromImage(bitmap), GraphReader.ReadGraph("graph3.txt")))
 {
     gen.Draw();
 
@@ -18,3 +20,5 @@ using (PictureGenerator gen = new RoundGrapfPictureGenerator(bitmap, Graphics.Fr
 Console.WriteLine("Всё сгенерированно");
 
 var p = Process.Start("explorer.exe", "myfile.jpg");
+
+//while(p.)

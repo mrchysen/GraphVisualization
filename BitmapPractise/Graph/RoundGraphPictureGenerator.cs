@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace BitmapPractise.Graph;
 
-public class RoundGrapfPictureGenerator : GraphPictureGenerator
+public class RoundGraphPictureGenerator : GraphPictureGenerator
 {
     public int R { get; set; }
 
-    public RoundGrapfPictureGenerator(Bitmap picture, Graphics graphics, Graph graph, int R = 100) : base(picture, graphics, graph)
+    public RoundGraphPictureGenerator(Bitmap picture, Graphics graphics, Graph graph, int R = 100) : base(picture, graphics, graph)
     {
         this.R = R;
     }
