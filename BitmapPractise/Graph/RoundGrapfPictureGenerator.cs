@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BitmapPractise;
+namespace BitmapPractise.Graph;
 
 public class RoundGrapfPictureGenerator : GraphPictureGenerator
 {

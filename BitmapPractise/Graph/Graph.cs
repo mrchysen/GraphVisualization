@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BitmapPractise
+namespace BitmapPractise.Graph
 {
     public class Graph
     {
@@ -15,7 +15,7 @@ namespace BitmapPractise
         public List<int> this[int index] => Nodes[index];
 
         public Graph() { }
-        public Graph(List<List<int>> graph) 
+        public Graph(List<List<int>> graph)
         {
             Nodes = graph;
         }

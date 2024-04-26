@@ -1,4 +1,5 @@
 ﻿using BitmapPractise;
+using BitmapPractise.Graph;
 using System.Diagnostics;
 using System.Drawing;
 

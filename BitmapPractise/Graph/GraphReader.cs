@@ -1,4 +1,4 @@
-﻿namespace BitmapPractise;
+﻿namespace BitmapPractise.Graph;
 
 public static class GraphReader
 {
@@ -11,7 +11,7 @@ public static class GraphReader
     {
         List<List<int>> ans = new();
 
-        if(File.Exists(path))
+        if (File.Exists(path))
         {
             try
             {
@@ -31,7 +31,7 @@ public static class GraphReader
                         data = sr.ReadLine().Split().Select(int.Parse).ToArray();
 
                         ans[data[0] - 1].Add(data[1] - 1);
-                        if(NW)
+                        if (NW)
                             ans[data[1] - 1].Add(data[0] - 1);
                     }
                 }
