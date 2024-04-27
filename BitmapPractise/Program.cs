@@ -10,7 +10,7 @@ Rectangle rec = new(20,20, W - 40, H - 40);
 
 Bitmap bitmap = new Bitmap(W, H);
 
-using (PictureGenerator gen = new RoundGraphPictureGenerator(bitmap, Graphics.FromImage(bitmap), GraphReader.ReadGraph("graph3.txt")))
+using (PictureGenerator gen = new RandomGraphPictureGenerator(bitmap, Graphics.FromImage(bitmap), GraphReader.ReadGraph("graph2.txt"),rec))
 {
     gen.Draw();
 

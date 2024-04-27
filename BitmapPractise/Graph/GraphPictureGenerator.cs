@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using BitmapPractise.Extensions;
@@ -33,31 +34,44 @@ namespace BitmapPractise.Graph
         {
             DrawArrow(begin, end);
 
-            graphics.DrawLine(DefaultPen, new Point(begin.X + NodeSize.Width / 2, begin.Y + +NodeSize.Height / 2), new Point(end.X + NodeSize.Width / 2, end.Y + +NodeSize.Height / 2));
+            graphics.DrawLine(DefaultPen, new Point(begin.X + NodeSize.Width / 2, begin.Y + NodeSize.Height / 2), new Point(end.X + NodeSize.Width / 2, end.Y +NodeSize.Height / 2));
         }
 
         protected void DrawArrow(Point begin, Point end)
         {
-            double dlina = Module(new Point(-end.X - begin.X, -end.Y - begin.Y));
-            double lambda = NodeSize.Width / dlina;
+            begin = new Point(begin.X + NodeSize.Width / 2, begin.Y +NodeSize.Width / 2);
+            end = new Point(end.X + NodeSize.Width / 2, end.Y + NodeSize.Width / 2);
+            double phi = Math.PI / 6;
 
-            Console.WriteLine(begin);
-            Console.WriteLine(end);
-            Console.WriteLine(dlina);
-            Console.WriteLine(lambda);
+            Point subPoint = new Point(-begin.X + end.X,-begin.Y + end.Y);
 
-            Point point = new Point(-end.X - begin.X, -end.Y - begin.Y);
-            point = new Point((int)(point.X * lambda) + end.X, (int)(point.Y * lambda) + end.Y);
+            double r = NodeSize.Width / 2;
+            double dlina = Norm(subPoint);
 
-            var point1 = new Point(point.X,point.Y + 100);
+            // vec == AC
+            Point vec = new Point((int)(subPoint.X * (r / dlina)), (int)(subPoint.Y * (r / dlina)));
 
-            Console.WriteLine(point);
-            Console.WriteLine(point1);
+            var vec1 = Rotate(phi, vec);
+            var vec2 = Rotate(-phi, vec);
 
-            graphics.DrawLine(DefaultPen, point, point1);
+            // point == C
+            Point point = new Point((int)(begin.X + subPoint.X * (r / dlina)), (int)(begin.Y + subPoint.Y * (r / dlina)));
+
+            //Point point1 = new Point(point.X,point.Y - 10);
+
+            Point ArrowPoint1 = new Point(point.X + vec1.X, point.Y + vec1.Y);
+            Point ArrowPoint2 = new Point(point.X + vec2.X, point.Y + vec2.Y);
+            graphics.FillPolygon(DefaultBrush, new Point[] { ArrowPoint1, ArrowPoint2, point });
+            //graphics.DrawLine(DefaultPen, point, ArrowPoint1);
+            //graphics.DrawLine(DefaultPen, point, ArrowPoint2);
+
+            //graphics.DrawLine(DefaultPen, point, point1);
         }
 
-        protected double Module(Point point) => Math.Sqrt(point.X * point.X + point.Y * point.Y);
+        protected Point Rotate(double fi, Point p) => new Point((int)(p.X * Math.Cos(fi) - p.Y*Math.Sin(fi)),
+                                                        (int)(p.X * Math.Sin(fi) + p.Y * Math.Cos(fi)));
+
+        protected double Norm(Point point) => Math.Sqrt(point.X * point.X + point.Y * point.Y);
 
         protected void DrawNode(int Num, Point point)
         {
