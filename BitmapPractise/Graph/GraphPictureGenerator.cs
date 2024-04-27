@@ -20,7 +20,7 @@ namespace BitmapPractise.Graph
         public GraphPictureGenerator(Bitmap picture, Graphics graphics, Graph graph) : base(picture, graphics)
         {
             this.graph = graph;
-            DefaultPen = new Pen(DefaultBrush, 2);
+            DefaultPen = new Pen(DefaultBrush, 1);
         }
 
         public override void Draw()

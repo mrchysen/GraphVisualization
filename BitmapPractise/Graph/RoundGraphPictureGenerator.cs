@@ -20,7 +20,7 @@ public class RoundGraphPictureGenerator : GraphPictureGenerator
     {
         var n = graph.Count;
 
-        var centre = new Point(picture.Size.Width / 2, picture.Size.Height / 2);
+        var centre = new Point(picture.Size.Width / 2 - NodeSize.Width / 2, picture.Size.Height / 2 - NodeSize.Height / 2);
         double fi = 2 * Math.PI / n;
 
         for (int i = 0; i < n; i++)
