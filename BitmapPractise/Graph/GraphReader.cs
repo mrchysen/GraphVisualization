@@ -7,7 +7,7 @@ public static class GraphReader
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    public static Graph ReadGraph(string path, bool IsOriented = false)
+    public static Graph ReadGraph(string path, bool IsOriented = false, bool IsWeighted = false)
     {
         List<Node> ans = new();
 
@@ -20,6 +20,7 @@ public static class GraphReader
                     var data = sr.ReadLine().Split().Select(int.Parse).ToArray();
                     int n = data[0];
                     int m = data[1];
+                    
 
                     for (int i = 0; i < n; i++)
                     {
@@ -30,9 +31,19 @@ public static class GraphReader
                     {
                         data = sr.ReadLine().Split().Select(int.Parse).ToArray();
 
-                        ans[data[0] - 1].Add(new Edge(ans[data[1] - 1]));
+                        int weight = 1;
+
+                        if (IsWeighted)
+                        {
+                            weight = data[2];
+                        }
+
+                        ans[data[0] - 1].Add(new Edge(ans[data[1] - 1], weight));
+
                         if (!IsOriented)
-                            ans[data[1] - 1].Add(new Edge(ans[data[0] - 1]));
+                        {
+                            ans[data[1] - 1].Add(new Edge(ans[data[0] - 1], weight));
+                        }
                     }
                 }
             }
@@ -46,7 +57,7 @@ public static class GraphReader
             Console.WriteLine("info: No such file");
         }
 
-        Graph graph = new Graph(ans, false, IsOriented);
+        Graph graph = new Graph(ans, IsWeighted, IsOriented);
 
         return graph;
     }

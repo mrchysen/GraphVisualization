@@ -12,6 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="graph4.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="graph3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
