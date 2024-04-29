@@ -46,6 +46,8 @@ public static class GraphReader
             Console.WriteLine("info: No such file");
         }
 
-        return new Graph(ans);
+        Graph graph = new Graph(ans);
+
+        return graph;
     }
 }

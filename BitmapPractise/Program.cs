@@ -6,11 +6,11 @@ using System.Drawing;
 int W = 256;
 int H = 256;
 
-Rectangle rec = new(20,20, W - 40, H - 40);
+Rectangle rec = new(20,20, W - 60, H - 60);
 
 Bitmap bitmap = new Bitmap(W, H);
 
-using (PictureGenerator gen = new RoundGraphPictureGenerator(bitmap, Graphics.FromImage(bitmap), GraphReader.ReadGraph("graph2.txt")))
+using (PictureGenerator gen = new RandomGraphPictureGenerator(bitmap, Graphics.FromImage(bitmap), GraphReader.ReadGraph("graph2.txt"), rec))
 {
     gen.Draw();
 
