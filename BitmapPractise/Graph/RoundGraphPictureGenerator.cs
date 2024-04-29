@@ -29,7 +29,7 @@ public class RoundGraphPictureGenerator : GraphPictureGenerator
 
             for (int j = 0; j < graph[i].Count; j++)
             {
-                var point2 = GetPointByNum(graph[i][j], fi, centre);
+                var point2 = GetPointByNum(graph[i][j].ToNode.Id, fi, centre);
                     
                 DrawEdge(point, point2);
             }

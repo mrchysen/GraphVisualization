@@ -9,14 +9,16 @@ namespace BitmapPractise.Graph
     public class Graph
     {
         public int Count => Nodes.Count;
-        public List<List<int>> Nodes { get; protected set; } = new List<List<int>>();
-
-        public List<int> this[int index] => Nodes[index];
-
+        public readonly bool IsWeighted = false;
+        public readonly bool IsOriented = false;
+        public List<Node> Nodes { get; protected set; } = new List<Node>();
+        public Node this[int index] => Nodes[index];
         public Graph() { }
-        public Graph(List<List<int>> graph)
+        public Graph(List<Node> graph, bool isWeighted, bool isOriented)
         {
             Nodes = graph;
+            IsWeighted = isWeighted;
+            IsOriented = isOriented;
         }
     }
 }

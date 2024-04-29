@@ -28,7 +28,7 @@ public class RandomGraphPictureGenerator : GraphPictureGenerator
 
             for (int j = 0; j < graph[i].Count; j++)
             {
-                var point2 = GetPoint(graph[i][j]);
+                var point2 = GetPoint(graph[i][j].ToNode.Id);
                 
                 DrawEdge(point1, point2);
             }

@@ -3,13 +3,13 @@
 public static class GraphReader
 {
     /// <summary>
-    /// NW - неориентированный - если true то добавляется путь в обе стороны
+    /// IsOriented - ориентированный - если true то добавляется путь в обе стороны
     /// </summary>
     /// <param name="path"></param>
     /// <returns></returns>
-    public static Graph ReadGraph(string path, bool NW = false)
+    public static Graph ReadGraph(string path, bool IsOriented = false)
     {
-        List<List<int>> ans = new();
+        List<Node> ans = new();
 
         if (File.Exists(path))
         {
@@ -23,16 +23,16 @@ public static class GraphReader
 
                     for (int i = 0; i < n; i++)
                     {
-                        ans.Add(new());
+                        ans.Add(new Node(i));
                     }
 
                     for (int i = 0; i < m; i++)
                     {
                         data = sr.ReadLine().Split().Select(int.Parse).ToArray();
 
-                        ans[data[0] - 1].Add(data[1] - 1);
-                        if (NW)
-                            ans[data[1] - 1].Add(data[0] - 1);
+                        ans[data[0] - 1].Add(new Edge(ans[data[1] - 1]));
+                        if (!IsOriented)
+                            ans[data[1] - 1].Add(new Edge(ans[data[0] - 1]));
                     }
                 }
             }
@@ -46,7 +46,7 @@ public static class GraphReader
             Console.WriteLine("info: No such file");
         }
 
-        Graph graph = new Graph(ans);
+        Graph graph = new Graph(ans, false, IsOriented);
 
         return graph;
     }
