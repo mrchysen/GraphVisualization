@@ -6,7 +6,6 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using BitmapPractise.Extensions;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BitmapPractise.Graph
 {
@@ -30,11 +29,34 @@ namespace BitmapPractise.Graph
 
         protected abstract void DrawGraph();
 
-        protected void DrawEdge(Point begin, Point end)
+        protected void DrawEdge(Point begin, Point end, Edge? edge = null)
         {
             DrawArrow(begin, end);
 
             graphics.DrawLine(DefaultPen, new Point(begin.X + NodeSize.Width / 2, begin.Y + NodeSize.Height / 2), new Point(end.X + NodeSize.Width / 2, end.Y +NodeSize.Height / 2));
+
+            if (graph.IsWeighted)
+            {
+                if(edge == null)
+                {
+                    //throw new Exception("No set node for make weight visualization.");
+                }
+
+                DrawWeight(edge.Weight, begin, end);
+            }
+        }
+
+        protected void DrawWeight(int weight, Point begin, Point end)
+        {
+            begin = new Point(begin.X + NodeSize.Width / 2, begin.Y + NodeSize.Height / 2);
+            end = new Point(end.X + NodeSize.Width / 2, end.Y + NodeSize.Height / 2);
+
+            Point centre = new Point((begin.X + end.X) / 2, (begin.Y + end.Y) / 2);
+
+            Point textPoint = new Point(centre.X - 9 * weight.Digits(), centre.Y - 8);
+
+            graphics.FillRectangle(new SolidBrush(Color.White),new Rectangle(textPoint, new Size(20 * weight.Digits(), 16)));
+            graphics.DrawString(weight.ToString(), new Font("Arial", 11), DefaultBrush, textPoint);
         }
 
         protected void DrawArrow(Point begin, Point end)
@@ -48,24 +70,16 @@ namespace BitmapPractise.Graph
             double r = NodeSize.Width / 2;
             double dlina = Norm(subPoint);
 
-            // vec == AC
             Point vec = new Point((int)(subPoint.X * (r / dlina)), (int)(subPoint.Y * (r / dlina)));
 
             var vec1 = Rotate(phi, vec);
             var vec2 = Rotate(-phi, vec);
 
-            // point == C
             Point point = new Point((int)(begin.X + subPoint.X * (r / dlina)), (int)(begin.Y + subPoint.Y * (r / dlina)));
-
-            //Point point1 = new Point(point.X,point.Y - 10);
 
             Point ArrowPoint1 = new Point(point.X + vec1.X, point.Y + vec1.Y);
             Point ArrowPoint2 = new Point(point.X + vec2.X, point.Y + vec2.Y);
             graphics.FillPolygon(DefaultBrush, new Point[] { ArrowPoint1, ArrowPoint2, point });
-            //graphics.DrawLine(DefaultPen, point, ArrowPoint1);
-            //graphics.DrawLine(DefaultPen, point, ArrowPoint2);
-
-            //graphics.DrawLine(DefaultPen, point, point1);
         }
 
         protected Point Rotate(double fi, Point p) => new Point((int)(p.X * Math.Cos(fi) - p.Y*Math.Sin(fi)),
@@ -78,7 +92,7 @@ namespace BitmapPractise.Graph
             graphics.FillEllipse(new SolidBrush(Color.White), new Rectangle(point, NodeSize));
             graphics.DrawEllipse(DefaultPen, new Rectangle(point, NodeSize));
 
-            var NumberPoint = new Point(point.X + NodeSize.Width / 2 - Num.Digits() * 6 + Num.Digits(), point.Y + NodeSize.Height / 2 - 8);
+            var NumberPoint = new Point(point.X + NodeSize.Width / 2 - Num.Digits() * 6 + Num.Digits(), point.Y + NodeSize.Height / 2 - 8); ;
 
             graphics.DrawString(Num.ToString(), new Font("Arial", 11), DefaultBrush, NumberPoint);
         }

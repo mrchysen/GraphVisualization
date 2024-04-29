@@ -30,7 +30,7 @@ public class RandomGraphPictureGenerator : GraphPictureGenerator
             {
                 var point2 = GetPoint(graph[i][j].ToNode.Id);
                 
-                DrawEdge(point1, point2);
+                DrawEdge(point1, point2, graph[i][j]);
             }
         }
 
