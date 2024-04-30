@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,8 @@ public class RandomGraphPictureGenerator : GraphPictureGenerator
 
     protected override void DrawGraph()
     {
+        Points = new();
+
         var n = graph.Count;
 
         for (int i = 0; i < n; i++)

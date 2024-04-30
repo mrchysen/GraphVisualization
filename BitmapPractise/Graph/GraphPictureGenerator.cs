@@ -37,11 +37,6 @@ namespace BitmapPractise.Graph
 
             if (graph.IsWeighted)
             {
-                if(edge == null)
-                {
-                    //throw new Exception("No set node for make weight visualization.");
-                }
-
                 DrawWeight(edge.Weight, begin, end);
             }
         }
@@ -53,9 +48,9 @@ namespace BitmapPractise.Graph
 
             Point centre = new Point((begin.X + end.X) / 2, (begin.Y + end.Y) / 2);
 
-            Point textPoint = new Point(centre.X - 9 * weight.Digits(), centre.Y - 8);
+            Point textPoint = new Point(centre.X - 9 * weight.Digits() + 4, centre.Y - 8);
 
-            graphics.FillRectangle(new SolidBrush(Color.White),new Rectangle(textPoint, new Size(20 * weight.Digits(), 16)));
+            graphics.FillRectangle(new SolidBrush(Color.White),new Rectangle(textPoint, new Size(11 * weight.Digits(), 17)));
             graphics.DrawString(weight.ToString(), new Font("Arial", 11), DefaultBrush, textPoint);
         }
 
