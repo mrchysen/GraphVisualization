@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GraphVisualization.Models;
+using SkiaSharp;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BitmapPractise.Graph;
+namespace GraphVisualization.GraphDrawers;
 
-public class RandomGraphPictureGenerator : GraphPictureGenerator
+public class RandomGraphPictureGenerator(
+    SKBitmap bitmap,
+    Graph graph,
+    Rectangle randomZone) 
+    : GraphPictureGenerator(bitmap, graph)
 {
+    public Rectangle RandomZone { get; set; } = randomZone;
     public Random Random { get; set; } = new();
-    public Rectangle MapZone { get; set; } = new();
     public Dictionary<int, Point> Points { get; set; } = new();
 
-    public RandomGraphPictureGenerator(Bitmap picture, Graphics graphics, Graph graph, Rectangle rectangle) : base(picture, graphics, graph)
-    {
-        MapZone = rectangle;
-    }
-
-    protected override void DrawGraph()
+    public override void Draw()
     {
         Points = new();
 
@@ -53,8 +48,8 @@ public class RandomGraphPictureGenerator : GraphPictureGenerator
     {
         if (Points.ContainsKey(num)) return Points[num];
 
-        var x = Random.Next(MapZone.Left, MapZone.Right);
-        var y = Random.Next(MapZone.Top, MapZone.Bottom);
+        var x = Random.Next(RandomZone.Left, RandomZone.Right);
+        var y = Random.Next(RandomZone.Top, RandomZone.Bottom);
         
         var point = new Point(x, y);
 
@@ -69,8 +64,8 @@ public class RandomGraphPictureGenerator : GraphPictureGenerator
             }
                 
 
-            x = Random.Next(MapZone.Left, MapZone.Right);
-            y = Random.Next(MapZone.Top, MapZone.Bottom);
+            x = Random.Next(RandomZone.Left, RandomZone.Right);
+            y = Random.Next(RandomZone.Top, RandomZone.Bottom);
 
             point = new Point(x, y);
 
@@ -90,7 +85,7 @@ public class RandomGraphPictureGenerator : GraphPictureGenerator
         {
             var point2 = points[i];
 
-            if (Distance(point2, point) < NodeSize.Width*2 + 1)
+            if (Distance(point2, point) < Options.NodeSize.Width * 2 + 1)
             {
                 return true;
             }
