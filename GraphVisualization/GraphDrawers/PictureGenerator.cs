@@ -11,8 +11,6 @@ public abstract class PictureGenerator : IDisposable
     {
         _bitmap = bitmap;
         _canvas = new SKCanvas(bitmap);
-
-        _canvas.Clear(SKColors.White);
     }
 
     public abstract void Draw();

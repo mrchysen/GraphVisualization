@@ -20,7 +20,7 @@ public class RoundGraphPictureGenerator : GraphPictureGenerator
     {
         var n = _graph.Count;
 
-        var centre = new Point(
+        var centre = new SKPoint(
             _bitmap.Info.Width / 2 - Options.NodeSize.Width / 2, 
             _bitmap.Info.Height / 2 - Options.NodeSize.Height / 2);
         double fi = 2 * Math.PI / n;
@@ -45,8 +45,8 @@ public class RoundGraphPictureGenerator : GraphPictureGenerator
         }
     }
 
-    protected Point GetPointByNum(int num, double fi, Point centre) => 
-        new Point(
+    protected SKPoint GetPointByNum(int num, double fi, SKPoint centre) => 
+        new (
             centre.X + (int)(_raduis * Math.Cos(fi * num)),
             centre.Y + (int)(_raduis * Math.Sin(fi * num)));
 

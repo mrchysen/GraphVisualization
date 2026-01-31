@@ -14,7 +14,7 @@ public static class GraphReader
         bool IsOriented = false, 
         bool IsWeighted = false)
     {
-        List<Node> nodes = new();
+        List<Node> nodes = [];
 
         if (File.Exists(path))
         {

@@ -12,7 +12,7 @@ public class RandomGraphPictureGenerator(
 {
     public Rectangle RandomZone { get; set; } = randomZone;
     public Random Random { get; set; } = new();
-    public Dictionary<int, Point> Points { get; set; } = new();
+    public Dictionary<int, SKPoint> Points { get; set; } = new();
 
     public override void Draw()
     {
@@ -44,30 +44,29 @@ public class RandomGraphPictureGenerator(
     /// Method return random point or point that is in Points
     /// </summary>
     /// <returns></returns>
-    protected Point GetPoint(int num) 
+    protected SKPoint GetPoint(int num) 
     {
         if (Points.ContainsKey(num)) return Points[num];
 
         var x = Random.Next(RandomZone.Left, RandomZone.Right);
         var y = Random.Next(RandomZone.Top, RandomZone.Bottom);
         
-        var point = new Point(x, y);
+        var point = new SKPoint(x, y);
 
         int iter = 0;
 
         while (IsEngaged(point))
         {
-            if (iter > 1000)
+            if (iter > 1_000_000)
             {
                 Console.WriteLine("Не нашёл");
                 break;
             }
-                
 
             x = Random.Next(RandomZone.Left, RandomZone.Right);
             y = Random.Next(RandomZone.Top, RandomZone.Bottom);
 
-            point = new Point(x, y);
+            point = new SKPoint(x, y);
 
             iter++;
         }
@@ -77,7 +76,7 @@ public class RandomGraphPictureGenerator(
         return point;
     }
 
-    protected bool IsEngaged(Point point)
+    protected bool IsEngaged(SKPoint point)
     {
         var points = Points.Values.ToList();
 
@@ -94,7 +93,7 @@ public class RandomGraphPictureGenerator(
         return false;
     }
 
-    protected double Distance(Point point1, Point point2)
+    protected double Distance(SKPoint point1, SKPoint point2)
     {
         return Math.Sqrt(Math.Pow(point1.X - point2.X,2) + Math.Pow(point1.Y - point2.Y, 2));
     }

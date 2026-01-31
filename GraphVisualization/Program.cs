@@ -11,9 +11,11 @@ Rectangle randomZone = new(20,20, W - 60, H - 60);
 
 SKBitmap bitmap = new SKBitmap(W, H);
 
-using PictureGenerator gen = new RoundGraphPictureGenerator(
+using PictureGenerator gen = new RandomGraphPictureGenerator(
     bitmap,
-    GraphReader.ReadGraph("graph2.txt", false, true), 400);
+    GraphReader.ReadGraph("graph2.txt", false, true), randomZone);
+
+
 
 gen.Draw();
 
