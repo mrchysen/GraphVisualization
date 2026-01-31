@@ -24,16 +24,16 @@ public abstract class GraphPictureGenerator : PictureGenerator
     }
 
     protected void DrawEdge(
-        SKPoint begin, SKPoint end, Edge edge)
+        SKPoint begin, SKPoint end, Edge? edge = null)
     {
-        DrawArrow(begin, end);
+        DrawArrow(end, begin);
 
         _canvas.DrawLine(
             new SKPoint(begin.X, begin.Y),
             new SKPoint(end.X, end.Y),
             Options.LinePaint);
 
-        if (_graph.IsWeighted)
+        if (edge is not null && _graph.IsWeighted)
         {
             DrawWeight(edge.Weight, begin, end);
         }
@@ -57,6 +57,11 @@ public abstract class GraphPictureGenerator : PictureGenerator
         _canvas.DrawText(weight.ToString(), numberPoint.X, numberPoint.Y, Options.Font, Options.FontPaint);
     }
 
+    /// <summary>
+    /// Draw arrow from p2 to p1
+    /// </summary>
+    /// <param name="p1"></param>
+    /// <param name="p2"></param>
     protected void DrawArrow(SKPoint p1, SKPoint p2)
     {
         var p3 = p2 - p1;

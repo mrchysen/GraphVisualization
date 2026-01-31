@@ -11,9 +11,9 @@ Rectangle randomZone = new(20,20, W - 60, H - 60);
 
 SKBitmap bitmap = new SKBitmap(W, H);
 
-using PictureGenerator gen = new RandomGraphPictureGenerator(
+using PictureGenerator gen = new TreePictureGenerator(
     bitmap,
-    GraphReader.ReadGraph("graph2.txt", false, true), randomZone);
+    GraphReader.ReadGraph("tree2.txt", true, false));
 
 
 

@@ -11,3 +11,6 @@ Circular node placement:
 
 Random node placement:
 ![Example of work](/Img/photo2.jpg)
+
+Tree node placement:
+![Example of work](/Img/photo3.jpg)

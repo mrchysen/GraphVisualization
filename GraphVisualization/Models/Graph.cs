@@ -10,6 +10,8 @@ public class Graph
 
     public readonly bool IsOriented = false;
 
+    public bool IsTree => Count - 1 == Nodes.Aggregate(0, (int s, Node n) => n.Edges.Count + s);
+
     public IEnumerable<Node> Nodes => _nodes;
 
     public Node this[int index] => _nodes[index];
