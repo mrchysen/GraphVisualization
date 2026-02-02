@@ -1,17 +1,16 @@
 ﻿using GraphVisualization.Models;
 using SkiaSharp;
-using System.Xml.Linq;
 
-namespace GraphVisualization.GraphDrawers;
+namespace GraphVisualization.GraphRenderer;
 
-public class TreePictureGenerator : GraphPictureGenerator
+public class TreeRenderer : GraphRenderer
 {
     private List<DepthNodes> _helpStructure = null!;
 
-    public TreePictureGenerator(
+    public TreeRenderer(
         SKBitmap bitmap, 
         Graph graph, 
-        GraphPictureOptions? options = null) : base(bitmap, graph, options)
+        RendererOptions? options = null) : base(bitmap, graph, options)
     {
         if (!graph.IsTree)
         {
@@ -21,13 +20,14 @@ public class TreePictureGenerator : GraphPictureGenerator
         UpdateHelpStructure();
     }
 
-    public override void Draw()
+    public override void Render()
     {
-        float deltaHeight = 100;
-
         var centre = new SKPoint(
             _bitmap.Info.Width / 2,
             0);
+
+        float deltaHeight = 100;
+        float heightStart = _bitmap.Info.Width / 2 - _helpStructure.Count * deltaHeight / 2;
 
         // Arrows
         for (int i = 0; i < _helpStructure.Count - 1; i++)
@@ -43,14 +43,14 @@ public class TreePictureGenerator : GraphPictureGenerator
                 var farherNum = _helpStructure[i].Nodes.IndexOf(fatherNode);
 
                 SKPoint fatherPoint =
-                    new SKPoint(fatherDepthDeltaWidth * (farherNum + 1), deltaHeight * fatherDepth);
+                    new SKPoint(fatherDepthDeltaWidth * (farherNum + 1), heightStart + deltaHeight * fatherDepth);
 
                 foreach (var childrenNode in fatherNode.Edges.Select(x => x.ToNode))
                 {
                     var chidlrenNum = _helpStructure[i + 1].Nodes.IndexOf(childrenNode);
 
                     SKPoint childrenPoint =
-                        new SKPoint(childrenDepthDeltaWidth * (chidlrenNum + 1), deltaHeight * childrenDepth);
+                        new SKPoint(childrenDepthDeltaWidth * (chidlrenNum + 1), heightStart + deltaHeight * childrenDepth);
 
                     DrawEdge(fatherPoint, childrenPoint);
                 }
@@ -66,7 +66,7 @@ public class TreePictureGenerator : GraphPictureGenerator
 
             for (var i = 0; i < node.Nodes.Count; i++) 
             {
-                DrawNode(node.Nodes[i].Id, new SKPoint(depthDeltaWidth * (i + 1), deltaHeight * current));
+                DrawNode(node.Nodes[i].Id, new SKPoint(depthDeltaWidth * (i + 1), heightStart + deltaHeight * current));
             }
         }
     }

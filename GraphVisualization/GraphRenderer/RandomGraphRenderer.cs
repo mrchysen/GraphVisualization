@@ -2,19 +2,19 @@
 using SkiaSharp;
 using System.Drawing;
 
-namespace GraphVisualization.GraphDrawers;
+namespace GraphVisualization.GraphRenderer;
 
-public class RandomGraphPictureGenerator(
+public class RandomGraphRenderer(
     SKBitmap bitmap,
     Graph graph,
     Rectangle randomZone) 
-    : GraphPictureGenerator(bitmap, graph)
+    : GraphRenderer(bitmap, graph)
 {
     public Rectangle RandomZone { get; set; } = randomZone;
     public Random Random { get; set; } = new();
     public Dictionary<int, SKPoint> Points { get; set; } = new();
 
-    public override void Draw()
+    public override void Render()
     {
         Points = new();
 

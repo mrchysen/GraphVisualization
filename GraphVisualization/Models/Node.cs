@@ -17,8 +17,8 @@ public class Node
         Id = id;
     }
 
-    public Node(int id, List<Edge> edges) : this(id)
+    public Node(int id, List<Edge>? edges = null) : this(id)
     {
-        Edges = edges;
+        Edges = edges ?? [];
     }
 }

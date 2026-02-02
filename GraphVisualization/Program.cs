@@ -1,5 +1,5 @@
 ﻿using GraphVisualization.FileOperating;
-using GraphVisualization.GraphDrawers;
+using GraphVisualization.GraphRenderer;
 using SkiaSharp;
 using System.Diagnostics;
 using System.Drawing;
@@ -9,15 +9,13 @@ int H = 512*2;
 
 Rectangle randomZone = new(20,20, W - 60, H - 60);
 
-SKBitmap bitmap = new SKBitmap(W, H);
+SKBitmap bitmap = new(W, H);
 
-using PictureGenerator gen = new TreePictureGenerator(
+using GraphRenderer gen = new TreeRenderer(
     bitmap,
     GraphReader.ReadGraph("tree2.txt", true, false));
 
-
-
-gen.Draw();
+gen.Render();
 
 gen.Save("myfile.jpg");
 

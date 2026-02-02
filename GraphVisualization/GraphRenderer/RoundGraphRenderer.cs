@@ -1,14 +1,13 @@
 ﻿using GraphVisualization.Models;
 using SkiaSharp;
-using System.Drawing;
 
-namespace GraphVisualization.GraphDrawers;
+namespace GraphVisualization.GraphRenderer;
 
-public class RoundGraphPictureGenerator : GraphPictureGenerator
+public class RoundGraphRenderer : GraphRenderer
 {
     private int _raduis { get; set; }
 
-    public RoundGraphPictureGenerator(
+    public RoundGraphRenderer(
         SKBitmap bitmap,
         Graph graph, 
         int raduis = 100) : base(bitmap, graph)
@@ -16,7 +15,7 @@ public class RoundGraphPictureGenerator : GraphPictureGenerator
         _raduis = raduis;
     }
 
-    public override void Draw()
+    public override void Render()
     {
         var n = _graph.Count;
 

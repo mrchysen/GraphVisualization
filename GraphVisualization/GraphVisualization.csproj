@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="GraphDrawers\Graph.cs~RFaa043e0.TMP" />
+    <None Remove="GraphRenderer\Graph.cs~RFaa043e0.TMP" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,9 +1,9 @@
 ﻿using SkiaSharp;
 using System.Drawing;
 
-namespace GraphVisualization.GraphDrawers;
+namespace GraphVisualization.GraphRenderer;
 
-public class GraphPictureOptions
+public class RendererOptions
 {
     public SKPaint Theme { get; set; } = new()
     {
@@ -78,6 +78,6 @@ public class GraphPictureOptions
 
     public Size NodeSize { get; set; } = new(20, 20);
 
-    public static GraphPictureOptions CreateDefault() 
+    public static RendererOptions CreateDefault() 
         => new();
 }

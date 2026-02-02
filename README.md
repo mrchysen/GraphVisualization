@@ -1,4 +1,4 @@
-## Graph Visualization
+# Graph Visualization
 
 A graph visualization library. It can read a graph from a file and display it using different plane layout strategies:
 - Random node placement
